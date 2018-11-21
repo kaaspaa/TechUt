@@ -27,10 +27,6 @@ public class Main{
         drg.removeDrug(drg.findDrugById(2));
         System.out.println(drg.getAllDrugs());
 
-        DrugManagerJDBC drg2 = new DrugManagerJDBC();
-        drg2.addDrug(new Drug("Dekristol 20000",73.99,2200,false));
-        System.out.println(drg2.getAllDrugs());
-
         drg.clearDrugs();
         System.out.println(drg.getAllDrugs());
     }
