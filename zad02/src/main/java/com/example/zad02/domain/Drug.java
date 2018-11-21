@@ -1,51 +1,43 @@
-package com.example.jdbcdemo.domain;
+package com.example.zad02.domain;
 
 public class Drug{
-	
-	private long id;
-	
-	private String name;
-	private String producer;
-	private int prize;
-	private int yoe;
-	
-	public Drug(String name, String producer, int prize, int yoe) {
-		super();
-		this.name = name;
-		this.producer = producer;
-		this.prize = prize;
-		this.yoe = yoe;
-	}
-	public long getId() {
-		return id;
-	}
-	public void setId(long id) {
-		this.id = id;
-	}
-	public String getName() {
-		return name;
-	}
-	public void setName(String name) {
-		this.name = name;
-	}
-	public int getProducer() {
-                return producer;
+
+        private static long counter = 0;
+        private long id;
+        private String name;
+        private double prize;
+        private int yoe;
+        private boolean isChildrenFriendly;
+
+
+        public Drug(String name, double prize, int yoe, boolean isChildrenFriendly) {
+                super();
+                this.name = name;
+                this.prize = prize;
+                this.yoe = yoe;
+                this.isChildrenFriendly = isChildrenFriendly;
         }
-        public void setYoe(String producer) {
-                this.producer = producer;
+
+        public long getId() {
+                return id;
         }
-	public int getPrize() {
+        public void setId(long id) { this.id = id; }
+        public String getName() { return name; }
+        public void setName(String name) {
+                this.name = name;
+        }
+        public double getPrize() {
                 return prize;
         }
         public void setPrize(int prize) {
                 this.prize = prize;
         }
-	public int getYoe() {
-		return yoe;
-	}
-	public void setYoe(int yoe) {
-		this.yoe = yoe;
-	}
+        public int getYoe() {
+                return yoe;
+        }
+        public void setYoe(int yoe) { this.yoe = yoe; }
+        public boolean getIsChildrenFriendly() { return isChildrenFriendly; }
+        public void setIsChildrenFriendly(boolean isChildrenFriendly) { this.isChildrenFriendly = isChildrenFriendly; }
 
-	
 }
+
