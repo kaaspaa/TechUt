@@ -1,0 +1,33 @@
+# ignore all bin directories
+# matches "bin" in any subfolder
+bin/
+
+# ignore all target directories
+target/
+
+# ignore all files ending with ~
+*~
+
+# ignore eclipse directories and project files
+.settings/
+.project
+.classpath
+
+# OSX
+
+*.DS_Store
+.AppleDouble
+.LSOverride
+
+# Icon must end with two \r
+Icon
+
+
+# Thumbnails
+._*
+
+# IntelliJ
+*.iml
+.idea
+
+*.log
