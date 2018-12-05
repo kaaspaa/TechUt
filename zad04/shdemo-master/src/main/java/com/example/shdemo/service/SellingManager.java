@@ -11,7 +11,8 @@ public interface SellingManager {
 	List<Buyer> getAllClients();
 	void deleteClient(Buyer buyer);
 	Buyer findClientByPin(String pin);
-	
+	Buyer findBuyerById(Long id);
+
 	Long addNewDrug(Drug drug);
 	List<Drug> getAvailableDrugs();
 	Drug findDrugById(Long id);

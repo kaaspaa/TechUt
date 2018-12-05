@@ -66,6 +66,10 @@ public class SellingMangerHibernateImpl implements SellingManager {
 		return (Buyer) sessionFactory.getCurrentSession().getNamedQuery("buyer.byPin").setString("pin", pin).uniqueResult();
 	}
 
+	@Override
+	public Buyer findBuyerById(Long id){
+		return (Buyer) sessionFactory.getCurrentSession().get(Buyer.class, id);
+	}
 
 	@Override
 	public Long addNewDrug(Drug drug) {

@@ -33,11 +33,17 @@ public class SellingManagerTest {
 	private final String NAME_2 = "Franek";
 	private final String PIN_2 = "369258";
 
+	private final String NAME_3 = "Dzbanek";
+	private final String PIN_3 = "491562";
+
 	private final String DNAME_1 = "Dekristol";
 	private final String BAR_CODE_1 = "123d321c";
 
 	private final String DNAME_2 = "Rutinoscorbit";
 	private final String BAR_CODE_2 = "456g852a";
+
+	private final String DNAME_3 = "Żubrinoscorbin";
+	private final String BAR_CODE_3 = "354f123a";
 
 	@Test
 	public void addClientCheck() {
@@ -104,6 +110,13 @@ public class SellingManagerTest {
 		assertEquals(1, ownedDrugs.size());
 		assertEquals(DNAME_2, ownedDrugs.get(0).getName());
 		assertEquals(BAR_CODE_2, ownedDrugs.get(0).getBarCode());
+	}
+
+	@Test
+	public void findBuyerCheck() {
+		Buyer buyer = new Buyer();
+		//TODO rest of the test
+
 	}
 
 }
