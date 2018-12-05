@@ -45,6 +45,12 @@ public class SellingManagerTest {
 	private final String DNAME_3 = "Żubrinoscorbin";
 	private final String BAR_CODE_3 = "354f123a";
 
+	private final String DNAME_4 = "Cholinex";
+	private final String BAR_CODE_4 = "354g003a";
+
+	private final String DNAME_5 = "Meta - lek na kaszel";
+	private final String BAR_CODE_5 = "931m784q";
+
 	@Test
 	public void addClientCheck() {
 
@@ -113,10 +119,39 @@ public class SellingManagerTest {
 	}
 
 	@Test
-	public void findBuyerCheck() {
+	public void findBuyerByIDCheck() {
 		Buyer buyer = new Buyer();
-		//TODO rest of the test
 
+		buyer.setFirstName(NAME_3);
+		buyer.setPin(PIN_3);
+
+		Drug drug1 = new Drug();
+		Drug drug2 = new Drug();
+		Drug drug3 = new Drug();
+
+
+		drug1.setName(DNAME_3);
+		drug2.setName(DNAME_4);
+		drug3.setName(DNAME_5);
+		drug1.setBarCode(BAR_CODE_3);
+		drug2.setBarCode(BAR_CODE_4);
+		drug3.setBarCode(BAR_CODE_5);
+
+		sellingManager.addClient(buyer);
+		sellingManager.addNewDrug(drug1);
+		sellingManager.addNewDrug(drug2);
+		sellingManager.addNewDrug(drug3);
+
+		Buyer testBuyer = new Buyer();
+		testBuyer = sellingManager.findBuyerById(buyer.getId());
+
+		assertEquals(NAME_3,testBuyer.getFirstName());
+		assertEquals(PIN_3,testBuyer.getPin());
+	}
+
+	@Test
+	public void getAvailableDrugsCheck() {
+		//TODO eVeRyThInG
 	}
 
 }
