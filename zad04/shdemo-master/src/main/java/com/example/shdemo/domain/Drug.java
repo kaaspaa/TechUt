@@ -12,6 +12,7 @@ public class Drug {
 	private String name;
 	private String barCode;
 	private Boolean availability = true;
+	private Description description;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -33,4 +34,8 @@ public class Drug {
 	public String getBarCode() { return barCode; }
 
 	public void setBarCode(String barCode) { this.barCode = barCode; }
+
+	@OneToOne(fetch = FetchType.LAZY)
+	public Description getDescription() { return  description; }
+	public void setDescription(Description description) { this.description = description; }
 }
