@@ -12,7 +12,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.example.shdemo.domain.Drug;
 import com.example.shdemo.domain.Buyer;
-import sun.security.krb5.internal.crypto.Des;
 
 @Component
 @Transactional

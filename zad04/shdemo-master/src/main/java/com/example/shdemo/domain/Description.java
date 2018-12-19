@@ -4,7 +4,7 @@ import javax.persistence.*;
 
 @Entity
 @NamedQueries({
-		@NamedQuery(name = "description.all", query = "Select ds from Description")
+		@NamedQuery(name = "description.all", query = "Select ds from Description ds")
 })
 public class Description {
 	private Long id;

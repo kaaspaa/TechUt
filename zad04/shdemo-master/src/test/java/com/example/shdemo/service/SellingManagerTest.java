@@ -289,8 +289,9 @@ public class SellingManagerTest {
 		d.setDescription(ds);
 
 		Description test = sellingManager.getDrugDescription(d);
+		//System.out.println("d - " + d.getDescription() + "\ntest - " + test.getDescription());
 
-		assertEquals(test.getDescription(),d.getDescription());
+		assertEquals(test.getDescription(),d.getDescription().getDescription());
 	}
 
 
