@@ -16,7 +16,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.example.shdemo.domain.Drug;
 import com.example.shdemo.domain.Buyer;
-import sun.security.krb5.internal.crypto.Des;
 
 import javax.persistence.Id;
 
@@ -392,6 +391,56 @@ public class SellingManagerTest {
 
 		sellingManager.addBuyer(b);
 		sellingManager.addBuyer(b2);
+	}
+
+	@Test
+	public void updateBuyerTest() {
+		Buyer b = new Buyer();
+		b.setFirstName(NAME_7);
+		b.setPin(PIN_3);
+		sellingManager.addBuyer(b);
+
+		b.setPin(PIN_7);
+		sellingManager.updateBuyer(b);
+
+		assertEquals(b.getPin(),sellingManager.getAllBuyers().get(0).getPin());
+	}
+
+	@Test
+	public void updateDrugTest() {
+		Drug d = new Drug();
+		d.setName(DNAME_5);
+		d.setBarCode(BAR_CODE_3);
+		sellingManager.addNewDrug(d);
+
+		d.setBarCode(BAR_CODE_5);
+		sellingManager.updateDrug(d);
+
+		assertEquals(d.getBarCode(),sellingManager.getAvailableDrugs().get(0).getBarCode());
+	}
+
+	@Test
+	public void updateDescriptionTest() {
+		Description d = new Description();
+		d.setDescription(DESCRIPTION_3);
+		sellingManager.addDescription(d);
+
+		d.setDescription(DESCRIPTION_1);
+		sellingManager.updateDescription(d);
+
+		assertEquals(d.getDescription(),sellingManager.getAllDescriptions().get(0).getDescription());
+	}
+
+	@Test
+	public void updateReceptionistTest() {
+		Receptionist r = new Receptionist();
+		r.setFirstName(RNAME_2);
+		sellingManager.addReceptionist(r);
+
+		r.setFirstName(RNAME_1);
+		sellingManager.updateReceptionist(r);
+
+		assertEquals(r.getFirstName(),sellingManager.getAllReceptionists().get(0).getFirstName());
 	}
 
 }

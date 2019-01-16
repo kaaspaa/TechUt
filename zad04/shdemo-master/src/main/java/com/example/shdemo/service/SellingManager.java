@@ -15,10 +15,12 @@ public interface SellingManager {
 	void deleteDrug(Drug drug);
 	Buyer findBuyerByPin(String pin);
 	Buyer findBuyerById(Long id);
+	void updateBuyer(Buyer buyer);
 	
 	Long addNewDrug(Drug drug);
 	List<Drug> getAvailableDrugs();
 	Drug findDrugById(Long id);
+	void updateDrug(Drug drug);
 
 	List<Drug> getOwnedDrugs(Buyer buyer);
 	void sellDrug(Long buyerId, Long drugId);
@@ -27,9 +29,11 @@ public interface SellingManager {
 	List<Description> getAllDescriptions();
 	Description getDrugDescription(Drug drug);
 	void deleteDescription(Description description);
+	void updateDescription(Description description);
 
 	void addReceptionist(Receptionist receptionist);
 	List<Receptionist> getAllReceptionists();
 	void deleteReceptionist(Receptionist receptionist);
+	void updateReceptionist(Receptionist receptionist);
 
 }

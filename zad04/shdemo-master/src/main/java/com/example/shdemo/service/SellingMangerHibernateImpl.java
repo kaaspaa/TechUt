@@ -152,4 +152,30 @@ public class SellingMangerHibernateImpl implements SellingManager {
 		sessionFactory.getCurrentSession().delete(receptionist);
 	}
 
+	@Override
+	public void updateDrug(Drug drug){
+		if(drug.getId()!=null&&findDrugById(drug.getId())!=null)
+            sessionFactory.getCurrentSession().update(drug);
+        else
+        	addNewDrug(drug);
+	}
+
+	@Override
+	public void updateBuyer(Buyer buyer) {
+		if(buyer.getId()!=null&&findBuyerById(buyer.getId())!=null)
+            sessionFactory.getCurrentSession().update(buyer);
+        else
+        	addBuyer(buyer);
+	}
+
+	@Override
+	public void updateDescription(Description description) {
+		sessionFactory.getCurrentSession().saveOrUpdate(description);
+	}
+
+	@Override
+	public void updateReceptionist(Receptionist receptionist) {
+		sessionFactory.getCurrentSession().saveOrUpdate(receptionist);
+	}
+
 }
