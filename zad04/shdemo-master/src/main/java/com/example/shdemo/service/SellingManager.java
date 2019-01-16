@@ -7,6 +7,7 @@ import com.example.shdemo.domain.Drug;
 import com.example.shdemo.domain.Buyer;
 import com.example.shdemo.domain.Receptionist;
 
+
 public interface SellingManager {
 	
 	void addBuyer(Buyer buyer);
