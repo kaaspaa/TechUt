@@ -4,18 +4,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
+import javax.persistence.*;
 
 @Entity
 @NamedQueries({ 
@@ -31,6 +20,7 @@ public class Buyer {
 	private Date registrationDate = new Date();
 
 	private List<Drug> drugs = new ArrayList<Drug>();
+	private List<Receptionist> receptionists = new ArrayList<Receptionist>();
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -66,4 +56,8 @@ public class Buyer {
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	public List<Drug> getDrugs() { return drugs; }
 	public void setDrugs(List<Drug> drugs) { this.drugs = drugs; }
+
+	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	public List<Receptionist> getReceptionists() { return this.receptionists;}
+	public void setReceptionists( List<Receptionist> receptionists) {this.receptionists = receptionists;}
 }

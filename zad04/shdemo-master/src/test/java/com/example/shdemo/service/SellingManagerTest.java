@@ -1,12 +1,11 @@
 package com.example.shdemo.service;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
-
 import java.util.List;
 
 import com.example.shdemo.domain.Description;
+import com.example.shdemo.domain.Receptionist;
+import javassist.runtime.Desc;
+import org.hibernate.exception.ConstraintViolationException;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,8 +16,11 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.example.shdemo.domain.Drug;
 import com.example.shdemo.domain.Buyer;
+import sun.security.krb5.internal.crypto.Des;
 
 import javax.persistence.Id;
+
+import static org.junit.Assert.*;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = { "classpath:/beans.xml" })
@@ -43,6 +45,11 @@ public class SellingManagerTest {
 
 	private final String NAME_5 = "Ulanek";
 	private final String PIN_5 = "121545";
+
+	private final String NAME_6 = "Janek";
+	private final String PIN_6 = "012300";
+	private final String NAME_7 = "Hamek";
+	private final String PIN_7 = "012300";
 
 	private final String DNAME_1 = "Dekristol";
 	private final String BAR_CODE_1 = "123d321c";
@@ -71,10 +78,17 @@ public class SellingManagerTest {
 
 	private final String DESCRIPTION_1 = "taki lek bierzesz se raz na jakis czas";
 	private final String DESCRIPTION_2 = "psikasz do gardla 3 razy w ciagu dnia";
+	private final String DESCRIPTION_4 = "wezmisz czarno kure...";
+	private final String DESCRIPTION_3 = "polewasz woda i pijesz do dna 5x dziennie";
+	private final String DESCRIPTION_5 = "zapalic i wdychac w zamknietym pomieszczeniu";
 
 	private final String DNAME_9 = "Finlandija";
 	private final String BAR_CODE_9 = "915d741z";
-	private final String DESCRIPTION_3 = "polewasz woda i pijesz do dna 5x dziennie";
+
+	private final String RNAME_1 = "Kasia";
+	private final String RNAME_2 = "Ela";
+	private final String RNAME_3 = "Kinga";
+	private final String RNAME_4 = "Ola";
 
 	@Test
 	public void SellingManagerTest() {
@@ -82,7 +96,7 @@ public class SellingManagerTest {
 	}
 
 	@Test
-	public void addClientCheck() {
+	public void addBuyerCheck() {
 
 		List<Buyer> retrievedClients = sellingManager.getAllBuyers();
 
@@ -151,6 +165,7 @@ public class SellingManagerTest {
 		assertEquals(1, ownedDrugs.size());
 		assertEquals(DNAME_2, ownedDrugs.get(0).getName());
 		assertEquals(BAR_CODE_2, ownedDrugs.get(0).getBarCode());
+		assertFalse(ownedDrugs.get(0).getAvailability());
 	}
 
 	@Test
@@ -275,6 +290,19 @@ public class SellingManagerTest {
 	}
 
 	@Test
+	public void deleteDescriptionTest(){
+		Description ds = new Description();
+		ds.setDescription(DESCRIPTION_4);
+
+		sellingManager.addDescription(ds);
+		sellingManager.deleteDescription(ds);
+
+		List<Description> test = sellingManager.getAllDescriptions();
+
+		assertEquals(test.size(),0);
+	}
+
+	@Test
 	public void addDesctiptionToDrugTest() {
 		Drug d = new Drug();
 		d.setName(DNAME_9);
@@ -294,6 +322,76 @@ public class SellingManagerTest {
 		assertEquals(test.getDescription(),d.getDescription().getDescription());
 	}
 
+	@Test
+	public void deleteDescriptionToDrugTest(){
+		Drug d = new Drug();
+		d.setBarCode(BAR_CODE_7);
+		d.setName(DNAME_7);
 
+		Description ds = new Description();
+		ds.setDescription(DESCRIPTION_5);
+
+		sellingManager.addNewDrug(d);
+		sellingManager.addDescription(ds);
+		sellingManager.deleteDescription(ds);
+
+		Description test = sellingManager.getDrugDescription(d);
+
+		assertEquals(d.getDescription(),null);
+
+	}
+
+	@Test
+	public void addReceptionistTest() {
+		Receptionist r = new Receptionist();
+		r.setFirstName(RNAME_1);
+		sellingManager.addReceptionist(r);
+
+		List<Receptionist> test = sellingManager.getAllReceptionists();
+		for(Receptionist receptionist : test){
+			assertEquals(RNAME_1,receptionist.getFirstName());
+		}
+	}
+
+	@Test
+	public void getAllReceptionistTest() {
+		Receptionist r = new Receptionist();
+		Receptionist r2 = new Receptionist();
+		r.setFirstName(RNAME_2);
+		r2.setFirstName(RNAME_3);
+		sellingManager.addReceptionist(r);
+		sellingManager.addReceptionist(r2);
+
+		List<Receptionist> test = sellingManager.getAllReceptionists();
+
+		assertEquals(test.size(),2);
+	}
+
+	@Test
+	public void deleteReceptionistTest() {
+		Receptionist r = new Receptionist();
+		r.setFirstName(RNAME_4);
+		sellingManager.addReceptionist(r);
+
+		sellingManager.deleteReceptionist(r);
+		List<Receptionist> test = sellingManager.getAllReceptionists();
+
+		for (Receptionist receptionist : test){
+			assertNotSame(receptionist.getFirstName(),RNAME_4);
+		}
+	}
+
+	@Test(expected = ConstraintViolationException.class)
+	public void add2BuyersWithSamePin() {
+		Buyer b = new Buyer();
+		b.setFirstName(NAME_6);
+		b.setPin(PIN_6);
+		Buyer b2 = new Buyer();
+		b2.setPin(PIN_7);
+		b2.setFirstName(NAME_7);
+
+		sellingManager.addBuyer(b);
+		sellingManager.addBuyer(b2);
+	}
 
 }

@@ -5,6 +5,7 @@ import java.util.List;
 import com.example.shdemo.domain.Description;
 import com.example.shdemo.domain.Drug;
 import com.example.shdemo.domain.Buyer;
+import com.example.shdemo.domain.Receptionist;
 
 public interface SellingManager {
 	
@@ -26,5 +27,9 @@ public interface SellingManager {
 	List<Description> getAllDescriptions();
 	Description getDrugDescription(Drug drug);
 	void deleteDescription(Description description);
+
+	void addReceptionist(Receptionist receptionist);
+	List<Receptionist> getAllReceptionists();
+	void deleteReceptionist(Receptionist receptionist);
 
 }

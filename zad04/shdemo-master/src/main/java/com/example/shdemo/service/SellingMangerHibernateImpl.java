@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.example.shdemo.domain.Description;
+import com.example.shdemo.domain.Receptionist;
 import javassist.runtime.Desc;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -131,6 +132,24 @@ public class SellingMangerHibernateImpl implements SellingManager {
 		description = (Description) sessionFactory.getCurrentSession().get(Description.class, description.getId());
 
 		sessionFactory.getCurrentSession().delete(description);
+	}
+
+	@Override
+	public void addReceptionist(Receptionist receptionist){
+		receptionist.setId(null);
+		sessionFactory.getCurrentSession().save(receptionist);
+	}
+
+	@Override
+	public List<Receptionist> getAllReceptionists(){
+		return sessionFactory.getCurrentSession().getNamedQuery("receptionist.all").list();
+	}
+
+	@Override
+	public void deleteReceptionist(Receptionist receptionist){
+		receptionist = (Receptionist) sessionFactory.getCurrentSession().get(Receptionist.class,receptionist.getId());
+
+		sessionFactory.getCurrentSession().delete(receptionist);
 	}
 
 }
