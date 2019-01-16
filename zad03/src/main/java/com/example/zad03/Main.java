@@ -22,12 +22,18 @@ public class Main{
         drugList.add(new Drug("Eutyhrox N50",99.99,2100,true));
 
         drg.addAllDrugs(drugList);
-        System.out.println(drg.getAllDrugs());
+        System.out.println("Wszystkie Drugs");
+        for( Drug drug : drg.getAllDrugs())
+            System.out.println("Id - " + drug.getId() +", name - " + drug.getName() + ", prize - " + drug.getPrize() +", year of production" + drug.getYoe() + ", is children friendly: " + drug.getIsChildrenFriendly());
 
         drg.removeDrug(drg.findDrugById(2));
-        System.out.println(drg.getAllDrugs());
+        System.out.println("Bez id=2");
+        for( Drug drug : drg.getAllDrugs())
+            System.out.println("Id - " + drug.getId() +", name - " + drug.getName() + ", prize - " + drug.getPrize() +", year of production" + drug.getYoe() + ", is children friendly: " + drug.getIsChildrenFriendly());
 
         drg.clearDrugs();
-        System.out.println(drg.getAllDrugs());
+        System.out.println("puste");
+        for( Drug drug : drg.getAllDrugs())
+           System.out.println("Id - " + drug.getId() +", name - " + drug.getName() + ", prize - " + drug.getPrize() +", year of production" + drug.getYoe() + ", is children friendly: " + drug.getIsChildrenFriendly());
     }
 }
